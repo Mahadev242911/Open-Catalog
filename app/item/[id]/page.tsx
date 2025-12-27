@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { getPokemonById } from "@/lib/api";
 import BackButton from "@/components/BackButton";
 
-// ================= TYPE COLORS =================
+
 const typeColors: Record<string, string> = {
   fire: "bg-red-500 text-white",
   water: "bg-blue-500 text-white",
@@ -27,7 +27,7 @@ const typeColors: Record<string, string> = {
   steel: "bg-gray-400 text-black",
 };
 
-// ================= STAT BAR COLOR =================
+
 const statColor = (value: number) => {
   if (value >= 100) return "from-green-400 to-green-600";
   if (value >= 70) return "from-yellow-400 to-orange-500";
@@ -41,13 +41,11 @@ export default function PokemonPage() {
   const [pokemon, setPokemon] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
-  // ===== DARK MODE =====
   const [darkMode, setDarkMode] = useState(false);
 
-  // ===== FAVORITE =====
   const [favorite, setFavorite] = useState(false);
 
-  // ===== DARK MODE LOAD =====
+
   useEffect(() => {
     const stored = localStorage.getItem("darkMode");
     if (stored === "true") {
@@ -78,7 +76,7 @@ export default function PokemonPage() {
     fetchPokemon();
   }, [id]);
 
-  // ===== FAVORITE HANDLER =====
+
   const handleFavorite = () => {
     const favs = JSON.parse(localStorage.getItem("favorites") || "[]");
 
@@ -100,7 +98,7 @@ export default function PokemonPage() {
     }
   };
 
-  // ===== COMPARE HANDLER =====
+ 
   const handleCompare = () => {
     router.push(`/compare?id=${pokemon.id}`);
   };
@@ -119,10 +117,10 @@ export default function PokemonPage() {
       dark:bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.25),transparent_40%),radial-gradient(circle_at_bottom,rgba(14,165,233,0.25),transparent_45%),linear-gradient(to_bottom,#020617,#020617)]
       transition-colors">
 
-      {/* VIGNETTE */}
+      
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle,transparent_60%,rgba(0,0,0,0.6))]" />
 
-      {/* DARK MODE TOGGLE */}
+   
       <button
         onClick={() => setDarkMode(!darkMode)}
         className="fixed top-4 right-4 z-50 px-4 py-2 rounded-full
@@ -134,7 +132,7 @@ export default function PokemonPage() {
 
       <BackButton />
 
-      {/* ================== POKEMON CARD ================== */}
+      
       <div className="group relative backdrop-blur-xl rounded-3xl p-10 max-w-md w-full
         bg-white/70 dark:bg-slate-800/70
         border border-white/20 dark:border-white/10
@@ -142,7 +140,7 @@ export default function PokemonPage() {
         transition-all duration-300
         hover:-translate-y-1 hover:shadow-[0_40px_80px_rgba(0,0,0,0.7)]">
 
-        {/* IMAGE */}
+       
         <img
           src={pokemon.sprites.front_default}
           alt={pokemon.name}
@@ -151,14 +149,14 @@ export default function PokemonPage() {
           transition-transform duration-300 group-hover:scale-110"
         />
 
-        {/* NAME */}
+       
         <h1 className="text-3xl font-bold capitalize text-center mt-6
           bg-gradient-to-r from-indigo-400 to-pink-400
           bg-clip-text text-transparent">
           {pokemon.name}
         </h1>
 
-        {/* HEIGHT / WEIGHT */}
+       
         <div className="grid grid-cols-2 gap-4 mt-8">
           <div className="rounded-xl bg-white/60 dark:bg-slate-700/60 p-4 text-center
             shadow-inner border border-white/20">
@@ -172,7 +170,6 @@ export default function PokemonPage() {
           </div>
         </div>
 
-        {/* TYPES */}
         <div className="flex justify-center gap-3 mt-6 flex-wrap">
           {pokemon.types.map((t: any) => (
             <span
@@ -187,7 +184,7 @@ export default function PokemonPage() {
           ))}
         </div>
 
-        {/* STATS */}
+        
         <div className="mt-8 space-y-4">
           {pokemon.stats.map((stat: any) => (
             <div key={stat.stat.name}>
@@ -206,7 +203,7 @@ export default function PokemonPage() {
           ))}
         </div>
 
-        {/* ACTIONS */}
+     
         <div className="mt-8 flex gap-3">
           <button
             onClick={handleFavorite}
