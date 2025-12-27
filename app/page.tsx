@@ -8,7 +8,7 @@ export default function HomePage() {
   const [data, setData] = useState<any>({ results: [] });
   const [loading, setLoading] = useState(true);
 
-  // Fetch Pokémon
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -23,11 +23,11 @@ export default function HomePage() {
     fetchData();
   }, []);
 
-  // Dark mode
+
   const [darkMode, setDarkMode] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // Hydration-safe dark mode setup
+
   useEffect(() => {
     setMounted(true);
     const saved = localStorage.getItem("darkMode");
@@ -40,7 +40,7 @@ export default function HomePage() {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
   }, [darkMode, mounted]);
 
-  // Heading color animation
+  
   const colors = ["#dd717c", "#2A9D8F", "#264653", "#68503d", "#6A4C93"];
   const [colorIndex, setColorIndex] = useState(0);
   useEffect(() => {
@@ -48,7 +48,7 @@ export default function HomePage() {
     return () => clearInterval(i);
   }, []);
 
-  // Search + Sort
+
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<"asc" | "desc">("asc");
 
@@ -58,7 +58,7 @@ export default function HomePage() {
       sort === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
     );
 
-  // Favorites
+
   const [favorites, setFavorites] = useState<any[]>(() => {
     if (typeof window !== "undefined") {
       return JSON.parse(localStorage.getItem("favorites") || "[]");
@@ -80,10 +80,10 @@ export default function HomePage() {
 
   return (
     <main className="relative min-h-screen px-4 py-8 transition-colors">
-      {/* VIGNETTE */}
+ 
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle,transparent_60%,rgba(0,0,0,0.6))]" />
 
-      {/* Dark mode toggle */}
+
       <button
         onClick={() => setDarkMode(!darkMode)}
         className="fixed top-4 right-4 z-50 px-4 py-2 rounded-full bg-slate-800 text-white dark:bg-slate-200 dark:text-black shadow-lg transition"
@@ -91,7 +91,6 @@ export default function HomePage() {
         {mounted ? (darkMode ? "☀️ Light" : "🌙 Dark") : null}
       </button>
 
-      {/* Heading */}
       <h1
         className="text-4xl font-extrabold text-center mb-2 transition-colors duration-500"
         style={{ color: colors[colorIndex] }}
@@ -103,7 +102,7 @@ export default function HomePage() {
         Browse hundreds of Pokemon view detailed stats, save your favorites, and compare power levels all in one beautifully designed Pokedex.
       </p>
 
-      {/* Search & Sort */}
+   
       <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
         <input
           placeholder="Search Pokemon .."
@@ -121,7 +120,6 @@ export default function HomePage() {
         </select>
       </div>
 
-      {/* Favorites */}
       {favorites.length > 0 && (
         <div className="mb-8 max-w-6xl mx-auto">
           <h2 className="text-xl font-bold mb-3 text-white">Favorites</h2>
@@ -143,7 +141,7 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* Grid */}
+ 
       {loading ? (
         <p className="text-center text-white">Loading...</p>
       ) : (
