@@ -34,6 +34,7 @@ ShadCN UI — for component styling
 
 ⚙️ Setup Instructions
 Follow these steps to run OpenCatalog locally:
+
 1️⃣ Clone the Repository
 git clone https://github.com/Mahadev242911/Open-Catalog.git
 
